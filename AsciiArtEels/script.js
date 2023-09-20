@@ -61,7 +61,7 @@ class AsciiEffect {
     }
     #scanImage(cellSize) {
         this.#imageCellArray = [];
-        let blank_array = [];
+        let overlay_array = [];
         let text_pos = 0;
         let reveal_text = '0123456789ABCDEF';
         let blank = true;
@@ -76,26 +76,23 @@ class AsciiEffect {
             for (let x = 0; x < this.#pixels.width-cellSize; x += cellSize) {
                 const xx = (x / cellSize) / (ww - 2);
                 const yy = (y / cellSize) / (hh - 2);
-                if ( //xx > 0.9
-                    Math.hypot(xx - 0.7 - 0.02 * Math.cos((0.5*t)+8*yy), Math.pow( (yy*0.05)+0.98-(0.07*t % 2.5), 3 ) - 0.12  ) < 0.12 // ||
-                     //Math.hypot(xx - 0.3 + 0.05 * Math.sin(3*yy), Math.pow( (yy*0.3)+1.6-(0.21*t % 2), 3 ) - 0.05  ) < 0.05 || 
-                     //Math.hypot(xx - 0.8 + 0.05 * Math.cos(5*yy), Math.pow( (yy*0.2)+2.0-(0.16*t % 2), 3 ) - 0.07  ) < 0.07 ||
-                     //Math.hypot(xx - 0.5 - 0.05 * Math.sin(7*yy), Math.pow( (yy*0.5)+0.5-(0.10*t % 2), 3 ) - 0.1  ) < 0.1
+                if ( 
+                    Math.hypot(xx - 0.7 - 0.05 * Math.sin((0.5*t)+6*yy), Math.pow( (yy*0.05)+0.98-(0.07*t % 2.5), 3 ) - 0.12  ) < 0.12
                      ) bl = 1;
                 else if (
                     Math.hypot(xx - 0.3 + 0.05 * Math.sin((0.7*t)+3*yy), Math.pow( (yy*0.3)+1.6-(0.21*t % 2.5), 3 ) - 0.05  ) < 0.05
                 ) bl = 2;
                 else if (
-                    Math.hypot(xx - 0.8 + 0.05 * Math.cos((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07
+                    Math.hypot(xx - 0.8 + 0.05 * Math.sin((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07
                 ) bl = 3;
                 else if (
                     Math.hypot(xx - 0.5 - 0.05 * Math.sin((1.6*t)+7*yy), Math.pow( (yy*0.5)+0.5-(0.10*t % 2.5), 3 ) - 0.1  ) < 0.1
                 ) bl = 4;
                 else if (
-                    Math.hypot(xx - 0.1 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.2)+0.05-(0.07*t % 2.5), 3 ) - 0.4  ) < 0.4
+                    Math.hypot(xx - 0.1 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.1)+0.25-(0.23*t % 2.5), 3 ) - 0.4  ) < 0.4
                 ) bl = 5;
                 else bl = -1;
-                blank_array.push(bl);
+                overlay_array.push(bl);
             }
         }
         
@@ -118,30 +115,31 @@ class AsciiEffect {
                     const symbol = this.#text[ ( text_pos % ( this.#text.length ) ) ];
                     //const symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     
-                    if (blank_array[i] >= 5) {
+                    if (overlay_array[i] == 5) {
                         blank = true;
-                        color = "rgb(" + this.#randint(0,255) + "," + this.#randint(0,255) + "," + this.#randint(0,255) + ")";  
-                   }
-                    if (blank_array[i] >= 4) {
+                        color = "rgb(" + 255 + "," + 255 + "," + 255 + ")"; 
+                        // This appears to be a glitch as it's never shown
+                    }
+                    if (overlay_array[i] == 4) {
                         blank = true;
-                        color = "rgb(" + 50 + "," + green + "," + 50 + ")";  
-                   }
-                    else if (blank_array[i] >= 3) {
+                        color = "rgb(" + parseInt(red/2) + "," + green + "," + blue + ")";  
+                    }
+                    else if (overlay_array[i] == 3) {
                         blank = true;
                         color = "rgb(" + red + "," + green + "," + 255 + ")";  
-                   }
-                    else if (blank_array[i] >= 2) {
+                    }
+                    else if (overlay_array[i] == 2) {
                          blank = true;
                          color = "rgb(" + red + "," + 255 + "," + blue + ")";  
                     }
-                    else if (blank_array[i] >= 1) {
+                    else if (overlay_array[i] == 1) {
                         blank = true;
-                        color = "rgb(" + 255 + "," + green + "," + blue + ")";  
+                        color = "rgb(" + 255 + "," + green + "," + 50 + ")";  
                     }
-                    /*else {
+                    else {
                         blank = true;
                         color = "rgb(" + red + "," + green + "," + blue + ")";  
-                    }*/
+                    }
                     //if (total > 200)
                     if (blank) {
                         this.#imageCellArray.push( new Cell(x, y, symbol, color) );
@@ -182,7 +180,7 @@ function handleSlider() {
 }
 
 let effect;
-let text = "SoThisMemoryIsRandomAccess?Yes,itCanOnlyAccessRandomThings.";
+let text = `InWhichWeAreIntroducedToWinnie-The-PoohAndSomeBees,AndTheStoriesBeginHereIsEdwardBear,ComingDownstairsNow,Bump,Bump,Bump,OnTheBackOfHisHead,BehindChristopherRobin.ItIs,AsFarAsHeKnows,TheOnlyWayOfComingDownstairs,ButSometimesHeFeelsThatThereReallyIsAnotherWay,IfOnlyHeCouldStopBumpingForAMomentAndThinkOfIt.AndThenHeFeelsThatPerhapsThereIsn't.Anyhow,HereHeIsAtTheBottom,AndReadyToBeIntroducedToYou.Winnie-The-Pooh.WhenIFirstHeardHisName,ISaid,JustAsYouAreGoingToSay,"ButIThoughtHeWasABoy?""SoDidI,"SaidChristopherRobin."ThenYouCan'tCallHimWinnie?""IDon't.""ButYouSaid——""He'sWinnie-Ther-Pooh.Don'tYouKnowWhat'Ther'Means?""Ah,Yes,NowIDo,"ISaidQuickly;AndIHopeYouDoToo,BecauseItIsAllTheExplanationYouAreGoingToGet.SometimesWinnie-The-PoohLikesAGameOfSomeSortWhenHeComesDownstairs,AndSometimesHeLikesToSitQuietlyInFrontOfTheFireAndListenToAStory.ThisEvening——"WhatAboutAStory?"SaidChristopherRobin."WhatAboutAStory?"ISaid."CouldYouVerySweetlyTellWinnie-The-PoohOne?""ISupposeICould,"ISaid."WhatSortOfStoriesDoesHeLike?""AboutHimself.BecauseHe'sThatSortOfBear.""Oh,ISee.""SoCouldYouVerySweetly?""I'llTry,"ISaid.SoITried.OnceUponATime,AVeryLongTimeAgoNow,AboutLastFriday,Winnie-The-PoohLivedInAForestAllByHimselfUnderTheNameOfSanders.("WhatDoes'UnderTheName'Mean?"AskedChristopherRobin."ItMeansHeHadTheNameOverTheDoorInGoldLetters,AndLivedUnderIt.""Winnie-The-PoohWasn'tQuiteSure,"SaidChristopherRobin."NowIAm,"SaidAGrowlyVoice."ThenIWillGoOn,"SaidI.)OneDayWhenHeWasOutWalking,HeCameToAnOpenPlaceInTheMiddleOfTheForest,AndInTheMiddleOfThisPlaceWasALargeOak-Tree,And,FromTheTopOfTheTree,ThereCameALoudBuzzing-Noise.Winnie-The-PoohSatDownAtTheFootOfTheTree,PutHisHeadBetweenHisPawsAndBeganToThink.FirstOfAllHeSaidToHimself:"ThatBuzzing-NoiseMeansSomething.YouDon'tGetABuzzing-NoiseLikeThat,JustBuzzingAndBuzzing,WithoutItsMeaningSomething.IfThere'sABuzzing-Noise,Somebody'sMakingABuzzing-Noise,AndTheOnlyReasonForMakingABuzzing-NoiseThatIKnowOfIsBecauseYou'reABee."ThenHeThoughtAnotherLongTime,AndSaid:"AndTheOnlyReasonForBeingABeeThatIKnowOfIsMakingHoney."AndThenHeGotUp,AndSaid:"AndTheOnlyReasonForMakingHoneyIsSoAsICanEatIt."SoHeBeganToClimbTheTree.HeClimbedAndHeClimbedAndHeClimbed,AndAsHeClimbedHeSangALittleSongToHimself.ItWentLikeThis:Isn'tItFunnyHowABearLikesHoney?Buzz!Buzz!Buzz!IWonderWhyHeDoes?ThenHeClimbedALittleFurther...AndALittleFurther...AndThenJustALittleFurther.ByThatTimeHeHadThoughtOfAnotherSong.It'sAVeryFunnyThoughtThat,IfBearsWereBees,They'dBuildTheirNestsAtTheBottomOfTrees.AndThatBeingSo(IfTheBeesWereBears),WeShouldn'tHaveToClimbUpAllTheseStairs.HeWasGettingRatherTiredByThisTime,SoThatIsWhyHeSangAComplainingSong.HeWasNearlyThereNow,AndIfHeJustStoodOnThatBranch...Crack!"Oh,Help!"SaidPooh,AsHeDroppedTenFeetOnTheBranchBelowHim.`;
 image1.onload = function intialize() {
     //canvas.width = image1.width;
     //canvas.height = image1.height;
