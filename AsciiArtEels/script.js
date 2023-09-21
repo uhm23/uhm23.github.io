@@ -119,12 +119,12 @@ class AsciiEffect {
                     }
                     else if (Math.hypot(xx - 0.3 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.1)+1.7-(0.13*t % 2.5), 3 ) - 0.1  ) < 0.1) {
                         blank = true;
-                        color = "rgb(" + parseInt(red/2) + "," + green + "," + blue + ")";
+                        color = "rgb(" + parseInt(red*0.8) + "," + parseInt(green*0.8) + "," + parseInt(blue*0.8) + ")";
                         symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     }
                     else if ( Math.hypot(xx - 0.8 + 0.05 * Math.sin((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07) {
                         blank = true;
-                        color = "rgb(" + red + "," + green + "," + 255 + ")";  
+                        color = "rgb(" + 35 + "," + green + "," + 255 + ")";  
                     }
                     else if (Math.hypot(xx - 0.5 - 0.05 * Math.sin((1.6*t)+7*yy), Math.pow( (yy*0.2)+0.5-(0.10*t % 2.5), 3 ) - 0.1  ) < 0.1) {
                          blank = true;
@@ -132,7 +132,7 @@ class AsciiEffect {
                     }
                     else if (Math.hypot(xx - 0.3 + 0.05 * Math.sin((0.7*t)+3*yy), Math.pow( (yy*0.3)+1.6-(0.21*t % 2.5), 3 ) - 0.05  ) < 0.05) {
                         blank = true;
-                        color = "rgb(" + 255 + "," + 255 + "," + 255 + ")";   
+                        color = "rgb(" + 225 + "," + 225 + "," + 100 + ")";   
                     }
                     else {
                         blank = true;
