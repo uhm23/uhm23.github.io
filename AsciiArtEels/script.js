@@ -79,6 +79,12 @@ class AsciiEffect {
         else return '';
 
     }
+    #jiggleDistance (x, y, t, offset, wiggleSpeed, wiggliness, shrinkFactor, initPosition, swimSpeed, swimSpace, scale) {
+        return Math.hypot(
+            x - offset - 0.05 * Math.sin((wiggleSpeed*t)+wiggliness*y),
+            Math.pow( (y*shrinkFactor)+initPosition-(swimSpeed*t % swimSpace), 3 )
+            - scale);
+    }
     #scanImage(cellSize) {
         this.#imageCellArray = [];
         let overlay_array = [];
@@ -113,24 +119,39 @@ class AsciiEffect {
                     let symbol = this.#text[ ( text_pos % ( this.#text.length ) ) ];
                     //const symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     
-                    if (Math.hypot(xx - 0.7 - 0.05 * Math.sin((0.5*t)+6*yy), Math.pow( (yy*0.05)+0.98-(0.07*t % 2.5), 3 ) - 0.12  ) < 0.12) {
+                    if (this.#jiggleDistance(xx, yy, t,
+                            0.7, 0.5, 6, 0.05,
+                            0.98, 0.07, 2.5, 0.12 ) < 0.12
+                        ) {
                         blank = true;
                         color = "rgb(" + 255 + "," + green + "," + 50 + ")";
                     }
-                    else if (Math.hypot(xx - 0.3 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.1)+1.7-(0.13*t % 2.5), 3 ) - 0.1  ) < 0.1) {
+                    else if (this.#jiggleDistance(xx, yy, t,
+                            0.3, 1.2, 8, 0.1,
+                            1.7, 0.13, 2.5, 0.1) < 0.1
+                        ) {
                         blank = true;
                         color = "rgb(" + parseInt(red*0.6) + "," + green + "," + blue + ")";
                         if (this.#randint(0,15) == 14) symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     }
-                    else if ( Math.hypot(xx - 0.8 + 0.05 * Math.sin((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07) {
+                    else if (this.#jiggleDistance(xx, yy, t,
+                        0.8, 1.2, 5, 0.2,
+                        1.0, 0.16, 2.5, 0.07) < 0.07
+                        ) {
                         blank = true;
                         color = "rgb(" + 35 + "," + green + "," + 255 + ")";  
                     }
-                    else if (Math.hypot(xx - 0.5 - 0.05 * Math.sin((1.6*t)+7*yy), Math.pow( (yy*0.2)+0.5-(0.10*t % 2.5), 3 ) - 0.1  ) < 0.1) {
+                    else if (this.#jiggleDistance(xx, yy, t,
+                            0.5, 1.6, 7, 0.2,
+                            0.5, 0.1, 2.5 , 0.1) < 0.1
+                        ) {
                          blank = true;
                          color = "rgb(" + red + "," + 255 + "," + blue + ")";  
                     }
-                    else if (Math.hypot(xx - 0.3 + 0.05 * Math.sin((0.7*t)+3*yy), Math.pow( (yy*0.3)+1.6-(0.21*t % 2.5), 3 ) - 0.05  ) < 0.05) {
+                    else if (this.#jiggleDistance(xx, yy, t,
+                            0.3, 0.7, 3, 0.3,
+                            1.6, 0.21, 2.5, 0.05) < 0.05                        
+                        ) {
                         blank = true;
                         color = "rgb(" + 225 + "," + 225 + "," + 100 + ")";   
                     }
