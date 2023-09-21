@@ -76,28 +76,6 @@ class AsciiEffect {
             for (let x = 0; x < this.#pixels.width-cellSize; x += cellSize) {
                 const xx = (x / cellSize) / (ww - 2);
                 const yy = (y / cellSize) / (hh - 2);
-                if ( 
-                    Math.hypot(xx - 0.7 - 0.05 * Math.sin((0.5*t)+6*yy), Math.pow( (yy*0.05)+0.98-(0.07*t % 2.5), 3 ) - 0.12  ) < 0.12
-                     ) bl = 1;
-                else if (
-                    Math.hypot(xx - 0.3 + 0.05 * Math.sin((0.7*t)+3*yy), Math.pow( (yy*0.3)+1.6-(0.21*t % 2.5), 3 ) - 0.05  ) < 0.05
-                ) bl = 2;
-                else if (
-                    Math.hypot(xx - 0.8 + 0.05 * Math.sin((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07
-                ) bl = 3;
-                else if (
-                    Math.hypot(xx - 0.5 - 0.05 * Math.sin((1.6*t)+7*yy), Math.pow( (yy*0.5)+0.5-(0.10*t % 2.5), 3 ) - 0.1  ) < 0.1
-                ) bl = 4;
-                else if (
-                    Math.hypot(xx - 0.1 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.1)+0.25-(0.23*t % 2.5), 3 ) - 0.4  ) < 0.4
-                ) bl = 5;
-                else bl = -1;
-                overlay_array.push(bl);
-            }
-        }
-        
-        for (let y = cellSize; y < this.#pixels.height; y += cellSize) {
-            for (let x = 0; x < this.#pixels.width-cellSize; x += cellSize) {
                 const posX = x * 4;
                 const posY = y * 4;
                 const pos = (posY * this.#pixels.width) + posX;
@@ -112,29 +90,29 @@ class AsciiEffect {
                     const averageColorValue = total / 3;
                     let color = "rgb(" + red + "," + green + "," + blue + ")";  
                     //const symbol = this.#convertToSymbol(averageColorValue);
-                    const symbol = this.#text[ ( text_pos % ( this.#text.length ) ) ];
+                    let symbol = this.#text[ ( text_pos % ( this.#text.length ) ) ];
                     //const symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     
-                    if (overlay_array[i] == 5) {
+                    if (Math.hypot(xx - 0.7 - 0.05 * Math.sin((0.5*t)+6*yy), Math.pow( (yy*0.05)+0.98-(0.07*t % 2.5), 3 ) - 0.12  ) < 0.12) {
                         blank = true;
-                        color = "rgb(" + 255 + "," + 255 + "," + 255 + ")"; 
-                        // This appears to be a glitch as it's never shown
+                        color = "rgb(" + 255 + "," + green + "," + 50 + ")";
                     }
-                    if (overlay_array[i] == 4) {
+                    else if (Math.hypot(xx - 0.3 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.1)+1.7-(0.13*t % 2.5), 3 ) - 0.1  ) < 0.1) {
                         blank = true;
-                        color = "rgb(" + parseInt(red/2) + "," + green + "," + blue + ")";  
+                        color = "rgb(" + parseInt(red/2) + "," + green + "," + blue + ")";
+                        symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     }
-                    else if (overlay_array[i] == 3) {
+                    else if ( Math.hypot(xx - 0.8 + 0.05 * Math.sin((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07) {
                         blank = true;
                         color = "rgb(" + red + "," + green + "," + 255 + ")";  
                     }
-                    else if (overlay_array[i] == 2) {
+                    else if (Math.hypot(xx - 0.5 - 0.05 * Math.sin((1.6*t)+7*yy), Math.pow( (yy*0.2)+0.5-(0.10*t % 2.5), 3 ) - 0.1  ) < 0.1) {
                          blank = true;
                          color = "rgb(" + red + "," + 255 + "," + blue + ")";  
                     }
-                    else if (overlay_array[i] == 1) {
+                    else if (Math.hypot(xx - 0.3 + 0.05 * Math.sin((0.7*t)+3*yy), Math.pow( (yy*0.3)+1.6-(0.21*t % 2.5), 3 ) - 0.05  ) < 0.05) {
                         blank = true;
-                        color = "rgb(" + 255 + "," + green + "," + 50 + ")";  
+                        color = "rgb(" + 255 + "," + 255 + "," + 255 + ")";   
                     }
                     else {
                         blank = true;
