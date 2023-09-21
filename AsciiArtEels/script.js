@@ -119,8 +119,8 @@ class AsciiEffect {
                     }
                     else if (Math.hypot(xx - 0.3 - 0.05 * Math.sin((1.2*t)+8*yy), Math.pow( (yy*0.1)+1.7-(0.13*t % 2.5), 3 ) - 0.1  ) < 0.1) {
                         blank = true;
-                        color = "rgb(" + parseInt(red*0.8) + "," + parseInt(green*0.8) + "," + parseInt(blue*0.8) + ")";
-                        symbol = reveal_text[this.#randint(0,reveal_text.length)];
+                        color = "rgb(" + parseInt(red*0.6) + "," + green + "," + blue + ")";
+                        if (this.#randint(0,5) == 4) symbol = reveal_text[this.#randint(0,reveal_text.length)];
                     }
                     else if ( Math.hypot(xx - 0.8 + 0.05 * Math.sin((1.2*t)+5*yy), Math.pow( (yy*0.2)+1.0-(0.16*t % 2.5), 3 ) - 0.07  ) < 0.07) {
                         blank = true;
