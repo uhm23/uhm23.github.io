@@ -172,7 +172,7 @@ function handleSlider() {
         //handleID = setInterval( function() { 
         Interval = setInterval( function() {
             effect.draw(parseInt(inputSlider.value))
-        }, 200 );
+        }, 100 );
            // }, 500);
     }
 }
