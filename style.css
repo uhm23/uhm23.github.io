@@ -38,9 +38,6 @@
     text-align: center;
 }
 @media screen and (orientation: portrait) {
-    #menu {
-        padding: 2vw;
-    }
     #svg_container {
         width: 100%;
     }
