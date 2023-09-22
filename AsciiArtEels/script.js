@@ -203,8 +203,9 @@ let text = `InWhichWeAreIntroducedToWinnie-The-PoohAndSomeBees,AndTheStoriesBegi
 image1.onload = function intialize() {
     //canvas.width = image1.width;
     //canvas.height = image1.height;
-    canvas.width = 640;
-    canvas.height = 640;
+    winSize = Math.min(window.innerHeight, window.innerWidth);
+    canvas.width = winSize * 0.8;
+    canvas.height = winSize * 0.8;
     effect = new AsciiEffect(ctx, image1, text, canvas.width, canvas.height);
     handleSlider();
 }
