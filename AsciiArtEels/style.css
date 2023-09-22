@@ -47,10 +47,7 @@ a {
 }
 
 @media screen and (orientation: portrait) {
-    #menu {
-        padding-left: 2vw;
-        padding-right: 2vw;;
-    }
+
 }
 .controls {
     visibility: hidden;
