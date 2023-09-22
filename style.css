@@ -42,8 +42,11 @@ a {
     text-align: center;
 }
 @media screen and (orientation: portrait) {
+    a {
+        font-size: 3vh;
+    }
     #top-bar {
-        height: 22vh;
+        height: 15vh;
     }
     #menu {
         padding-left: 12vw;
