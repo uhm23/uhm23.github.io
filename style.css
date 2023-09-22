@@ -22,13 +22,17 @@
     text-align: center;
     padding: 2vh;
 }
-a {
+#uhm23_icon {
+    padding-right: 10px;
+}
+#menu > a {
     color: #AAA;
     font-size: 5vh;
     text-decoration: none;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding-right: 10px;
 }
-#blog {
+#menu > #blog {
     color: #FFF;
     font-size: 5vh;
 }
