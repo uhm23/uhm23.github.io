@@ -3,9 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-body {
-
-}
 #overlay {
     position: fixed;
     display: block;
@@ -46,6 +43,11 @@ a {
 
 
 
+#UHM23 {
+    height: auto;
+    max-width:50%;
+    max-height:50%;
+}
 
 #U {
     animation: loading_opacity 6s linear 0.1s infinite;
