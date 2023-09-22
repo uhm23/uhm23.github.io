@@ -7,7 +7,7 @@
     position: fixed;
     display: block;
     width: 100%;
-    height: 10vh;
+    height: 6vh;
     top: 0;
     left: 0;
     right: 0;
@@ -20,22 +20,14 @@
     margin: auto;
     width: 80%;
     text-align: center;
-    padding: 2vh;
-}
-#menu > #uhm23_icon {
-    padding-right: 10px;
 }
 #menu > a {
     color: #AAA;
-    font-size: 5vh;
+    font-size: 3vh;
     text-decoration: none;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    padding-right: 10px;
+    font-family: sans-serif;
 }
-#menu > #blog {
-    color: #FFF;
-    font-size: 5vh;
-}
+
 #svg_container {
     display: block;
     position: absolute;
@@ -46,15 +38,9 @@
     text-align: center;
 }
 @media screen and (orientation: portrait) {
-    a {
-        font-size: 3vh;
-    }
-    #top-bar {
-        height: 15vh;
-    }
     #menu {
         padding-left: 12vw;
-        padding-right: 12vw;;
+        padding-right: 12vw;
     }
     #svg_container {
         width: 100%;
