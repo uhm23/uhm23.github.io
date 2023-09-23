@@ -40,8 +40,8 @@ class Cell {
         ctx.fillStyle = this.color;
         ctx.fillText(
             this.symbol,
-            this.x + cellSize * 0.55,
-            this.y + cellSize * 0.55
+            this.x + cellSize * 0.5,
+            this.y + cellSize * 0.5
         );
     }
 }
