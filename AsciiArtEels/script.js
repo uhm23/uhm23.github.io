@@ -36,9 +36,13 @@ class Cell {
         this.symbol = symbol;
         this.color = color;
     }
-    draw(ctx) {
+    draw(ctx, cellSize) {
         ctx.fillStyle = this.color;
-        ctx.fillText(this.symbol, this.x, this.y);
+        ctx.fillText(
+            this.symbol,
+            this.x + cellSize * 0.55,
+            this.y + cellSize * 0.55
+        );
     }
 }
 
@@ -99,7 +103,7 @@ class AsciiEffect {
         const ww = this.#pixels.width / cellSize;
         
         for (let y = cellSize; y < this.#pixels.height; y += cellSize) {
-            for (let x = 0; x < this.#pixels.width-cellSize; x += cellSize) {
+            for (let x = 0; x < this.#pixels.width; x += cellSize) {
                 const xx = (x / cellSize) / (ww - 2);
                 const yy = (y / cellSize) / (hh - 2);
                 const posX = x * 4;
@@ -171,16 +175,17 @@ class AsciiEffect {
         }
         //console.log(this.#imageCellArray);
     }
-    #drawAscii(){
+    #drawAscii(cellSize){
         this.#ctx.clearRect(0, 0, this.#width, this.#height);
         for ( let i = 0; i < this.#imageCellArray.length; i++) {
-            this.#imageCellArray[i].draw(this.#ctx);
+            this.#imageCellArray[i].draw(this.#ctx, cellSize);
         }
     }
     draw(cellSize){
+        ctx.textAlign = "center";
         ctx.font = cellSize + 'px monospace';
         this.#scanImage(cellSize);
-        this.#drawAscii();
+        this.#drawAscii(cellSize);
     }
 }
 
@@ -199,13 +204,15 @@ function handleSlider() {
 }
 
 let effect;
+// Text from out of copyright Winnie The Pooh 1926
 let text = `InWhichWeAreIntroducedToWinnie-The-PoohAndSomeBees,AndTheStoriesBeginHereIsEdwardBear,ComingDownstairsNow,Bump,Bump,Bump,OnTheBackOfHisHead,BehindChristopherRobin.ItIs,AsFarAsHeKnows,TheOnlyWayOfComingDownstairs,ButSometimesHeFeelsThatThereReallyIsAnotherWay,IfOnlyHeCouldStopBumpingForAMomentAndThinkOfIt.AndThenHeFeelsThatPerhapsThereIsn't.Anyhow,HereHeIsAtTheBottom,AndReadyToBeIntroducedToYou.Winnie-The-Pooh.WhenIFirstHeardHisName,ISaid,JustAsYouAreGoingToSay,"ButIThoughtHeWasABoy?""SoDidI,"SaidChristopherRobin."ThenYouCan'tCallHimWinnie?""IDon't.""ButYouSaid——""He'sWinnie-Ther-Pooh.Don'tYouKnowWhat'Ther'Means?""Ah,Yes,NowIDo,"ISaidQuickly;AndIHopeYouDoToo,BecauseItIsAllTheExplanationYouAreGoingToGet.SometimesWinnie-The-PoohLikesAGameOfSomeSortWhenHeComesDownstairs,AndSometimesHeLikesToSitQuietlyInFrontOfTheFireAndListenToAStory.ThisEvening——"WhatAboutAStory?"SaidChristopherRobin."WhatAboutAStory?"ISaid."CouldYouVerySweetlyTellWinnie-The-PoohOne?""ISupposeICould,"ISaid."WhatSortOfStoriesDoesHeLike?""AboutHimself.BecauseHe'sThatSortOfBear.""Oh,ISee.""SoCouldYouVerySweetly?""I'llTry,"ISaid.SoITried.OnceUponATime,AVeryLongTimeAgoNow,AboutLastFriday,Winnie-The-PoohLivedInAForestAllByHimselfUnderTheNameOfSanders.("WhatDoes'UnderTheName'Mean?"AskedChristopherRobin."ItMeansHeHadTheNameOverTheDoorInGoldLetters,AndLivedUnderIt.""Winnie-The-PoohWasn'tQuiteSure,"SaidChristopherRobin."NowIAm,"SaidAGrowlyVoice."ThenIWillGoOn,"SaidI.)OneDayWhenHeWasOutWalking,HeCameToAnOpenPlaceInTheMiddleOfTheForest,AndInTheMiddleOfThisPlaceWasALargeOak-Tree,And,FromTheTopOfTheTree,ThereCameALoudBuzzing-Noise.Winnie-The-PoohSatDownAtTheFootOfTheTree,PutHisHeadBetweenHisPawsAndBeganToThink.FirstOfAllHeSaidToHimself:"ThatBuzzing-NoiseMeansSomething.YouDon'tGetABuzzing-NoiseLikeThat,JustBuzzingAndBuzzing,WithoutItsMeaningSomething.IfThere'sABuzzing-Noise,Somebody'sMakingABuzzing-Noise,AndTheOnlyReasonForMakingABuzzing-NoiseThatIKnowOfIsBecauseYou'reABee."ThenHeThoughtAnotherLongTime,AndSaid:"AndTheOnlyReasonForBeingABeeThatIKnowOfIsMakingHoney."AndThenHeGotUp,AndSaid:"AndTheOnlyReasonForMakingHoneyIsSoAsICanEatIt."SoHeBeganToClimbTheTree.HeClimbedAndHeClimbedAndHeClimbed,AndAsHeClimbedHeSangALittleSongToHimself.ItWentLikeThis:Isn'tItFunnyHowABearLikesHoney?Buzz!Buzz!Buzz!IWonderWhyHeDoes?ThenHeClimbedALittleFurther...AndALittleFurther...AndThenJustALittleFurther.ByThatTimeHeHadThoughtOfAnotherSong.It'sAVeryFunnyThoughtThat,IfBearsWereBees,They'dBuildTheirNestsAtTheBottomOfTrees.AndThatBeingSo(IfTheBeesWereBears),WeShouldn'tHaveToClimbUpAllTheseStairs.HeWasGettingRatherTiredByThisTime,SoThatIsWhyHeSangAComplainingSong.HeWasNearlyThereNow,AndIfHeJustStoodOnThatBranch...Crack!"Oh,Help!"SaidPooh,AsHeDroppedTenFeetOnTheBranchBelowHim.`;
 image1.onload = function intialize() {
     //canvas.width = image1.width;
     //canvas.height = image1.height;
-    winSize = Math.min(window.innerHeight, window.innerWidth);
-    canvas.width = winSize * 0.95;
-    canvas.height = winSize * 0.95;
+    let winSize = Math.min(window.innerHeight, window.innerWidth);
+    let trim = winSize % parseInt(inputSlider.value);
+    canvas.width = winSize - trim * 0.95;
+    canvas.height = winSize - trim * 0.95;
     effect = new AsciiEffect(ctx, image1, text, canvas.width, canvas.height);
     handleSlider();
 }
