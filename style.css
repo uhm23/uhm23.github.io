@@ -56,6 +56,29 @@
     animation: loading_scale 1.5s linear 0.6s infinite;
 }
 
+/*
+#U:hover {
+    stroke-width: 1px;
+    stroke: black;
+}
+#H:hover {
+    stroke-width: 1px;
+    stroke: black;
+}
+#M:hover {
+    stroke-width: 1px;
+    stroke: black;
+}
+#Two:hover {
+    stroke-width: 1px;
+    stroke: black;
+}
+#Three:hover {
+    stroke-width: 1px;
+    stroke: black;
+}
+*/
+
 
 #U {
     animation: loading_opacity 6s linear 0.1s infinite;
