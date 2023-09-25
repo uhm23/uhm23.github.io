@@ -13,6 +13,8 @@ canvas {
     height: 100vh;
 }
 #menu {
+    display: flex;
+    flex-flow: column wrap;
     color: white;
     position: absolute;
     top: 0px;
@@ -21,9 +23,9 @@ canvas {
     height: auto;
     text-align: center;
     z-index: 2;
+    cursor: pointer;
 }
 #menu > a {
-    display: flex;
     text-decoration: none;
 }
 #overlay {
