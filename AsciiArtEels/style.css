@@ -6,27 +6,21 @@
 body {
     background-color: #000;
 }
-#top-bar {
-    position: fixed;
-    display: block;
+#menu {
+    cursor: pointer;
+    display: flex;
+    flex-flow: column wrap;
+    color: white;
+    position: absolute;
+    top: 0px;
+    right: 0px;
     width: auto;
     height: auto;
-    top: 0;
-    right: 0;
-    background-color: rgba(255,92,0,0.0);
-    z-index: 2;
-    cursor: pointer;
-}
-#menu {
-    margin: auto;
-    width: 99%;
     text-align: center;
+    z-index: 2;
 }
 #menu > a {
-    color: #AAA;
-    font-size: 3vh;
     text-decoration: none;
-    font-family: sans-serif;
 }
 
 .container {
@@ -86,10 +80,11 @@ body {
 }
 
 @media screen and (orientation: portrait) {
-    #top-bar {
-        left: 0;
+    #menu {
+        display: block;
+        width: 100%;
     }
-    #top-bar p {
-        display: none;
+    #menu a{
+        display: inline;
     }
 }

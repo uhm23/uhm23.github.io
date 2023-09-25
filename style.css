@@ -3,27 +3,37 @@
     padding: 0;
     box-sizing: border-box;
 }
-#top-bar {
-    position: fixed;
+body {
+    margin: 0;
+    font-family: monospace;
+}
+canvas {
     display: block;
-    width: auto;
-    height: auto;
-    top: 0;
-    right: 0;
-    background-color: rgba(255,92,0,0.0);
-    z-index: 2;
-    cursor: pointer;
+    width: 100vw;
+    height: 100vh;
 }
 #menu {
-    margin: auto;
-    width: 99%;
+    color: white;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: auto;
+    height: auto;
     text-align: center;
+    z-index: 2;
 }
 #menu > a {
-    color: #AAA;
-    font-size: 3vh;
+    display: flex;
     text-decoration: none;
-    font-family: sans-serif;
+}
+#overlay {
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100vw;
+    z-index: 3;
+    color: white;
 }
 
 #svg_container {
@@ -133,13 +143,12 @@
     }
 }
 
-  
 @media screen and (orientation: portrait) {
-    #top-bar {
-        left: 0;
+    #menu {
+        width: 100%;
     }
-    #top-bar #menu > p {
-        display: none;
+    #menu a{
+        display: inline;
     }
     #svg_container {
         width: 100%;
