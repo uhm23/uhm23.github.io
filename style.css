@@ -147,6 +147,7 @@ canvas {
 
 @media screen and (orientation: portrait) {
     #menu {
+        display: block;
         width: 100%;
     }
     #menu a{
