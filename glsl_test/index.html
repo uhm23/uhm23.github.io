@@ -48,20 +48,20 @@
         void main() {
             float t = time;
             float threshold = 0.05;
-            float scale = 24.0;
+            float scale = 1.0;
             float offset = 0.0;
             vec2 uv = gl_FragCoord.xy / resolution;
             //float aspect = max(resolution.x,resolution.y)/min(resolution.x,resolution.y);
             float aspect = resolution.x/resolution.y;
-            aspect = clamp(aspect, 1.0, 5.0); //stays on screen in portrait mode
-            uv.x -= 0.5;
+            scale = 1.6/aspect;
+            uv -= 0.5;
             uv.x *= aspect;
 
             vec3 color = vec3(0.9);
             //color = texture2D(u_channel1, uv).rgb;
             color = texture2D(u_channel1, vec2( 
-                    (uv.x + 0.5) - 0.025 * ( sin( t + 8.0 * uv.y ) ), 
-                    ( 1.0 - uv.y )
+                    ( ( (uv.x * scale) + 0.5) - 0.025 * ( sin( t + 8.0 * uv.y ) ) ), 
+                    ( 1.0 - (uv.y * scale) - 0.5)
                 )).rgb;
         
             gl_FragColor = vec4( vec3( color ), 1.0 );
