@@ -1,0 +1,80 @@
+#svg_container {
+    display: block;
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+@media screen and (orientation: portrait) {
+    #svg_container{
+        width: 100%;
+    }
+}
+
+
+
+#U {
+    animation: loading_opacity 6s linear 0.1s infinite;
+}
+#H {
+    animation: loading_opacity 6s linear 1s infinite;
+}
+#M {
+    animation: loading_opacity 6s linear 1.5s infinite;
+}
+#Two {
+    animation: loading_opacity 4s linear 1s infinite;
+}#Three {
+    animation: loading_opacity 4s linear 3s infinite;
+}
+#Left-Curve {
+    animation: loading_opacity 8s linear 3s infinite;
+}
+#Lower-Curve {
+    animation: loading_opacity 8s linear 7s infinite;
+}
+#Ball {
+    animation: loading_opacity 4s linear 3s infinite;
+}
+#Coming-Soon {
+    opacity: 0.2;
+}
+
+
+@keyframes loading_opacity {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*
+    #U:hover {
+        stroke-width: 1px;
+        stroke: black;
+    }
+    #H:hover {
+        stroke-width: 1px;
+        stroke: black;
+    }
+    #M:hover {
+        stroke-width: 1px;
+        stroke: black;
+    }
+    #Two:hover {
+        stroke-width: 1px;
+        stroke: black;
+    }
+    #Three:hover {
+        stroke-width: 1px;
+        stroke: black;
+    }
+*/

@@ -18,6 +18,7 @@ Document the algorithm.
 
 Optimise the code
 */
+
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
@@ -28,6 +29,7 @@ const inputSlider = document.getElementById('resolution');
 const inputLabel = document.getElementById('resolutionLabel');
 
 inputSlider.addEventListener('change', handleSlider);
+window.addEventListener('resize', handleSlider);
 
 class Cell {
     constructor(x, y, symbol, color) {
@@ -195,11 +197,16 @@ function handleSlider() {
         ctx.drawImage(image1, 0, 0, canvas.width, canvas.height);
     } else {
         inputLabel.innerHTML = 'Resolution: ' + inputSlider.value + 'px';
-        //handleID = setInterval( function() { 
-        Interval = setInterval( function() {
+        try{
+            clearInterval(Interval);
+        }
+        catch(e) {
+            console.log(e);
+        }
+        let Interval = setInterval( function() {
             effect.draw(parseInt(inputSlider.value))
         }, 100 );
-           // }, 500);
+        console.log(Interval);
     }
 }
 

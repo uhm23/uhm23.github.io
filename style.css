@@ -4,15 +4,15 @@
     box-sizing: border-box;
 }
 body {
-    margin: 0;
     font-family: monospace;
 }
-canvas {
+#c {
     display: block;
     width: 100vw;
     height: 100vh;
 }
 #menu {
+    font-size: 4vh;
     display: flex;
     flex-flow: column wrap;
     color: white;
@@ -20,8 +20,8 @@ canvas {
     top: 0px;
     right: 0px;
     width: auto;
-    height: auto;
-    text-align: center;
+    height: 100vh;
+    text-align: right;
     z-index: 2;
     cursor: pointer;
 }
@@ -29,131 +29,129 @@ canvas {
     text-decoration: none;
 }
 #overlay {
+    display: flex;
+    flex-flow: row wrap;
     text-align: center;
+    justify-content: center;
     position: absolute;
-    bottom: 0px;
-    right: 0px;
     width: 100vw;
-    z-index: 3;
-    color: white;
+    height: auto;
+    color: black;
+}
+.card_container {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    display: flex;
+    flex-flow: row wrap;
+    width: 100vw;
+    height: auto;
+    justify-content: center;
+    align-content: center;
+}
+.card {
+    display: grid;
+    border: 1px solid lightgrey;
+    height: fit-content;
+    width: fit-content;
+    margin: 20px;
+    text-align: center;
+    box-shadow: 10px 10px 15px lightblue;
+}
+.card img{
+    height: 240px;
 }
 
-#svg_container {
-    display: block;
-    position: absolute;
-    width: 40%;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+
+
+.icon{
+    align-self: flex-end;
+    display: flex;
+    flex-flow: row;
+}
+
+.icon img{
+    height: 10vh;
+}
+
+.vis_toggle{
+    align-self: center;
+    transform-origin: 105% 0%;
+    transform: scaleX(0);
+    transition: transform 1s;
+}
+
+.uhm23_icon:hover .vis_toggle{
+    transform: scaleX(1);
+}
+.js_icon:hover .vis_toggle{
+    transform: scaleX(1);
+}
+.jglcode_icon:hover .vis_toggle{
+    transform: scaleX(1);
 }
 
 
 #uhm23_icon {
-    animation: loading_scale 1s linear 0.1s 2;
+    animation: loading_scale 2s linear 0.6s 2;
 }
 #js_icon {
-    animation: loading_scale 1s linear 0.3s 2;
+    animation: loading_scale 2.5s linear 0.6s 2;
 }
 #jglcode_icon{
-    animation: loading_scale 1s linear 0.6s 2;
-}
-#uhm23_icon:hover {
-    animation: loading_scale 1.5s linear 0.1s infinite;
-}
-#js_icon:hover {
-    animation: loading_scale 1.5s linear 0.3s infinite;
-}
-#jglcode_icon:hover {
-    animation: loading_scale 1.5s linear 0.6s infinite;
+    animation: loading_scale 3s linear 0.8s 2;
 }
 
 /*
-#U:hover {
-    stroke-width: 1px;
-    stroke: black;
+#uhm23_icon:hover {
+    animation: loading_scale 1.5s linear 0.9s infinite;
 }
-#H:hover {
-    stroke-width: 1px;
-    stroke: black;
+#js_icon:hover {
+    animation: loading_scale 1.5s linear 0.9s infinite;
 }
-#M:hover {
-    stroke-width: 1px;
-    stroke: black;
-}
-#Two:hover {
-    stroke-width: 1px;
-    stroke: black;
-}
-#Three:hover {
-    stroke-width: 1px;
-    stroke: black;
+#jglcode_icon:hover {
+    animation: loading_scale 1.5s linear 0.9s infinite;
 }
 */
-
-
-#U {
-    animation: loading_opacity 6s linear 0.1s infinite;
-}
-#H {
-    animation: loading_opacity 6s linear 1s infinite;
-}
-#M {
-    animation: loading_opacity 6s linear 1.5s infinite;
-}
-#Two {
-    animation: loading_opacity 4s linear 1s infinite;
-}#Three {
-    animation: loading_opacity 4s linear 3s infinite;
-}
-#Left-Curve {
-    animation: loading_opacity 8s linear 3s infinite;
-}
-#Lower-Curve {
-    animation: loading_opacity 8s linear 7s infinite;
-}
-#Ball {
-    animation: loading_opacity 4s linear 3s infinite;
-}
-#Coming-Soon {
-    opacity: 0.2;
-}
-
-  
-@keyframes loading_opacity {
-    0% {
-        opacity: 1;
-    }
-    50% {
-        opacity: 0.2;
-
-    }
-    100% {
-        opacity: 1;
-    }
-}
 
 @keyframes loading_scale {
     0% {
         transform: scale(1);
     }
     50% {
-        transform: scale(0.9);
+        transform: scale(0.8);
     }
     100% {
-        transform: scale(1)
+        transform: scale(1);
     }
 }
 
 @media screen and (orientation: portrait) {
+    .card_container{
+        padding-top: 10vh;
+    }
     #menu {
-        display: block;
+        font-size: 4vw;
+        justify-content: center;
+        align-content: flex-start;
+        display: flex;
+        flex-flow: row wrap;
         width: 100%;
     }
+    .vis_toggle{
+        transform: scaleY(0);
+    }
+    .uhm23_icon:hover .vis_toggle{
+        transform: scaleY(1);
+    }
+    .js_icon:hover .vis_toggle{
+        transform: scaleY(1);
+    }
+    .jglcode_icon:hover .vis_toggle{
+        transform: scaleY(1);
+    }
+
     #menu a{
-        display: inline;
-    }
-    #svg_container {
-        width: 100%;
+        flex-flow: column-reverse wrap;
+        display: flex;
     }
 }

@@ -1,0 +1,22 @@
+body {
+    background-color: #000;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.controls {
+    display: none; /* ctrl-shift-i & change this to flex for visibility */
+}
+.controls > input {
+    width: 75%;
+}
+.controls > label {
+    width: 25%;
+    color: white;
+    font-size: 15px;
+}
