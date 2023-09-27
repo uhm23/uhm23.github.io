@@ -1,3 +1,4 @@
+/*
 #svg_container {
     display: block;
     position: absolute;
@@ -6,12 +7,14 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-}
+} */
 
-@media screen and (orientation: portrait) {
-    #svg_container{
-        width: 100%;
-    }
+#logo_image {
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
 }
 
 

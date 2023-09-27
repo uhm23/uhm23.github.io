@@ -74,19 +74,15 @@ body {
 }
 
 .vis_toggle{
+    opacity: 0;
     align-self: center;
     transform-origin: 105% 0%;
     transform: scaleX(0);
     transition: transform 1s;
 }
 
-.uhm23_icon:hover .vis_toggle{
-    transform: scaleX(1);
-}
-.js_icon:hover .vis_toggle{
-    transform: scaleX(1);
-}
-.jglcode_icon:hover .vis_toggle{
+.icon:hover .vis_toggle{
+    opacity: 1;
     transform: scaleX(1);
 }
 
