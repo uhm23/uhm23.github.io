@@ -136,6 +136,7 @@ body {
         display: flex;
         flex-flow: row wrap;
         width: 100%;
+        height: auto;
     }
     .vis_toggle{
         transform: scaleY(0);
