@@ -57,12 +57,19 @@
             vec3 color = vec3(0.0);
             vec2 uv = gl_FragCoord.xy / resolution;
             uv =  vec2(uv.x,1.0-uv.y);
-            float aspect = resolution.x/resolution.y;
-            scale = 1.4/aspect;                         //current 'solution' for portrait mode scale
-            uv -= 0.5;
-            uv.x *= aspect;
 
-            uv *= scale;                                //current 'solution' for portrait mode scale
+            uv -= 0.5;  
+
+
+            // Find a way to remove the conditional.
+            if (resolution.x > resolution.y) {
+                float aspect = resolution.x/resolution.y;
+                uv.x *= aspect;
+            }
+            else {
+                float aspect = resolution.y/resolution.x;
+                uv.y *= aspect;
+            }
             
             color = texture2D(u_channel1, vec2( 
                     ( (uv.x + 0.5) - 0.025 * ( sin( t + 8.0 * uv.y ) ) ), 
